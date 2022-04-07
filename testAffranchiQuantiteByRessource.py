@@ -1,6 +1,8 @@
 import unittest
+
+from affranchi import Affranchi
+from outil import Outil
 from ressource import Ressource
-from ouvrier import Ouvrier
 from categorie import Categorie
 
 class testOuvrierQuantiteByRessource(unittest.TestCase):
@@ -13,7 +15,11 @@ class testOuvrierQuantiteByRessource(unittest.TestCase):
         self.resArchitecture = Ressource("architecture")
         self.categA = Categorie("Apprenti", 2)
 
-        self.app1 = Ouvrier("ouvrier")
+        self.app1 = Affranchi("ouvrier", self.categA)
+
+        self.outil1 = Outil("Scie",self.resBois)
+
+        self.app1.equiperOutil(self.outil1)
         self.app1.ajouterRessource(self.resBois,1)
         self.app1.ajouterRessource(self.resPierre,1)
 

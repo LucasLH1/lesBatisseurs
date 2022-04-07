@@ -11,27 +11,37 @@ bois = Ressource("bois")
 architecture = Ressource("architecture")
 decoration = Ressource("decoration")
 
-ziggourat = Batiment("Le Ziggourat", 14, 5, {pierre : 1, bois : 2, architecture : 3, decoration : 4})
+la_pyramide = Batiment("La Pyramide", 18, 8)
 
 categorieMaitre = Categorie("Maître", 5.0)
 categorieCompagnon = Categorie("Compagnon", 4.0)
 categorieManoeuvre = Categorie("Manoeuvre",3.0)
 categorieApprenti = Categorie("Apprenti",2.0)
 
-outil1 = Outil("Scie",bois,1)
+outil1 = Outil("Scie",bois)
 
-listeOuvriers = [Ouvrier("Ouahibrê"),Affranchi("Ptahâa",categorieApprenti),Affranchi("Amenemheb",categorieManoeuvre)]
+
+ouvrier1 = Ouvrier("Ouahibrê")
+ouvrier2 = Affranchi("Ptahâa",categorieApprenti)
+ouvrier3 = Affranchi("Amenemheb",categorieManoeuvre)
+listeOuvriers = [ouvrier1, ouvrier2, ouvrier3]
 
 if __name__ == '__main__':
-    print("Bienvenue dans le jeu des Batisseurs.\nListe des ouvriers : \n")
+    print("Bienvenue dans le jeu des Batisseurs.\n")
     listeOuvriers[0].ajouterRessource(pierre,1)
     listeOuvriers[0].ajouterRessource(bois,1)
     listeOuvriers[1].ajouterRessource(pierre,1)
     listeOuvriers[1].ajouterRessource(bois,1)
+
     listeOuvriers[2].ajouterRessource(pierre,1)
     listeOuvriers[2].ajouterRessource(bois,2)
     listeOuvriers[2].ajouterRessource(architecture,2)
-    listeOuvriers[2].equiperOutil(outil1)
-    print(afficherListe(listeOuvriers))
-    print(listeOuvriers[2].quantiteByRessource(architecture))
-    #print(ziggourat)
+    ouvrier3.equiperOutil(outil1)
+
+    print(ouvrier3.quantiteByRessource(bois))
+
+    la_pyramide.ajouterRessource(pierre, 4)
+    la_pyramide.ajouterRessource(bois, 4)
+    la_pyramide.ajouterRessource(architecture, 4)
+    la_pyramide.ajouterRessource(decoration, 4)
+    print(la_pyramide)

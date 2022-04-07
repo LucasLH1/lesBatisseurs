@@ -1,27 +1,42 @@
-from ressource import Ressource
+from typing import List
 
+from ressource import Ressource
+from ouvrier import Ouvrier
 
 class Batiment:
-    def __init__(self, nom: str, gain: int, ptVictoire: int, ressourcesNecessaires: dict[Ressource, int]):
-        self.__nom = nom
-        self.__gain = gain
-        self.__ptVictoire = ptVictoire
-        self.__ressourcesNecessaires = ressourcesNecessaires
+    def __init__(self, libelle: str, pointsVictoire: int, gainSesterces: int ):
+        self.__libelle = libelle
+        self.__gainSesterces = gainSesterces
+        self.__pointsVictoire = pointsVictoire
+        self.ressourcesNecessaires = {Ressource("pierre"): 0, Ressource("bois"): 0, Ressource("architecture"): 0,
+                                Ressource("decoration"): 0}
+        self.__listeOuvriers = List[Ouvrier]
+    def getLibelle(self):
+        return self.__libelle
 
-    def getNom(self):
-        return self.__nom
+    def getGainSesterces(self):
+        return self.__gainSesterces
 
-    def getGain(self):
-        return self.__gain
+    def pointsVictoire(self):
+        return self.__pointsVictoire
 
-    def ptVictoire(self):
-        return self.__ptVictoire
+    def ajouterRessource(self, ressource: Ressource, quantite: int) -> None:
+        for key in self.ressourcesNecessaires.keys():
+            if ressource == key:
+                self.ressourcesNecessaires[key] += quantite
 
     def getRessources(self):
-        return self.__ressourcesNecessaires
+        return self.ressourcesNecessaires
+
+    def qteEquipeByRessource(self):
+
+    def envoyerTravaillerOuvrier(self, unOuvrier : Ouvrier):
+        self.__listeOuvriers.append(unOuvrier)
+
 
     def __str__(self):
-        affichage = "Bâtiment : " + str(self.__nom) + "\nGain d'argent : " + str(self.__gain) + "\nGain en point de victoire : " + str(self.__ptVictoire) + "\nCout en ressources : \n"
-        for ressource, nombre in self.__ressourcesNecessaires.items():
-            affichage+=  "- " + str(ressource) + " : " + str(nombre) + "\n"
+        affichage = "Batiment : " + self.getLibelle() + "\nLe bâtiment requiert les ressources :\n"
+        for ressource, nombre in self.ressourcesNecessaires.items():
+            if nombre != 0:
+                affichage += "- " + str(ressource.getNom()) + " : " + str(nombre) + "\n"
         return  affichage

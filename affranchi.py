@@ -8,10 +8,7 @@ class Affranchi(Ouvrier):
     def __init__(self, nom:str, categorie: Categorie):
         super().__init__(nom)
         self.__categorie = categorie
-        self.__outil = Outil
-        self.__equiperOutil = False
-        self.__lesRessources = {Ressource("pierre"): 0, Ressource("bois"): 0, Ressource("architecture"): 0,
-                                Ressource("decoration"): 0}
+        self.__outil = None
 
     def getCout(self):
         return self.getCategorie().getSalaire()
@@ -22,17 +19,22 @@ class Affranchi(Ouvrier):
     def setCategorie(self, valeur : Categorie):
         self.__categorie = valeur
 
+    def getOutil(self):
+        return self.__outil
+
     def equiperOutil(self, outil : Outil):
         self.__outil = outil
-        self.__equiperOutil = True
 
     def quantiteByRessource(self, uneRessource: Ressource) -> int:
-        for ressource in self.__lesRessources.keys():
-            if ressource == uneRessource:
-                return self.__lesRessources[ressource]
+        qte = super().quantiteByRessource(uneRessource)
+        if self.__outil is not None:
+            if uneRessource==self.getOutil().getRessource():
+                qte+=self.getOutil().getQuantite()
+        return qte
 
 
     def __str__(self):
         res = super().__str__(0)
         res+="Coût de mise sur chantier : " + str(self.getCout()) + " sesterces\n"
+        res+=str(self.getOutil())
         return res
