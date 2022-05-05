@@ -25,14 +25,13 @@ class Batiment:
             if ressource == key:
                 self.ressourcesNecessaires[key] += quantite
 
+    def quantiteByRessourceBatiment(self, uneRessource: Ressource) -> int:
+        for ressource in self.ressourcesNecessaires.keys():
+            if ressource == uneRessource:
+                return self.ressourcesNecessaires[ressource]
+
     def getRessources(self):
         return self.ressourcesNecessaires
-
-    def qteEquipeByRessource(self):
-
-    def envoyerTravaillerOuvrier(self, unOuvrier : Ouvrier):
-        self.__listeOuvriers.append(unOuvrier)
-
 
     def __str__(self):
         affichage = "Batiment : " + self.getLibelle() + "\nLe bâtiment requiert les ressources :\n"

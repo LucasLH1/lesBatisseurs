@@ -5,6 +5,7 @@ from categorie import Categorie
 from ressource import Ressource
 from batiment import Batiment
 from affranchi import Affranchi
+from chantier import Chantier
 
 pierre = Ressource("pierre")
 bois = Ressource("bois")
@@ -12,6 +13,7 @@ architecture = Ressource("architecture")
 decoration = Ressource("decoration")
 
 la_pyramide = Batiment("La Pyramide", 18, 8)
+chantier1 = Chantier(la_pyramide)
 
 categorieMaitre = Categorie("Maître", 5.0)
 categorieCompagnon = Categorie("Compagnon", 4.0)
@@ -38,10 +40,11 @@ if __name__ == '__main__':
     listeOuvriers[2].ajouterRessource(architecture,2)
     ouvrier3.equiperOutil(outil1)
 
-    print(ouvrier3.quantiteByRessource(bois))
-
     la_pyramide.ajouterRessource(pierre, 4)
     la_pyramide.ajouterRessource(bois, 4)
     la_pyramide.ajouterRessource(architecture, 4)
     la_pyramide.ajouterRessource(decoration, 4)
     print(la_pyramide)
+
+    chantier1.envoyerTravaillerOuvrier(listeOuvriers[0])
+    print(chantier1.getListeOuvriers())

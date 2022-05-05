@@ -29,7 +29,7 @@ class Ouvrier:
             if ressource == uneRessource:
                 return self.lesRessources[ressource]
 
-    def __str__(self, version=1):
+    def __repr__(self, version=1):
         affichage = "Ouvrier : " + self.getNom() + "\nL'ouvrier possède ces ressources :\n"
         for ressource, nombre in self.lesRessources.items():
             if nombre != 0:
